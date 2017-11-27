@@ -1,6 +1,9 @@
 import numpy as np
-x = np.array([[1, 2, 3],[2, 4, 5]])
-print(x[1])
-
-#z.append(np.zeros((1,2)))
-#print(z.shape)
+import Initial_NeuralNetwork as INN
+l = np.array([3, 3, 2, 1])
+w = []
+w.clear()
+#w.append(INN.initial_W(unitsNum_inLayer = l))
+#w = INN.initial_W(unitsNum_inLayer = l)
+w = np.append(w, INN.initial_W(unitsNum_inLayer = l))
+print(w[0].shape)

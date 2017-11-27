@@ -12,14 +12,27 @@ import  numpy as np
 
 #L = 3
 #m = 1
-x = np.array([1, 2, 3])
-x = x.reshape((3, 1))
+#x = np.array([[1, 2, 3]]).T
+x = np.array([[1, 2, 3]])
+#x = x.reshape((x.shape[0], x.shape[1]))
 
-y = np.array([1])
-y = y.reshape((1, 1)) 
+y = np.array([[1]])
+#y = y.reshape((1, 1)) 
 
-l = np.array([x.shape[0], 3, 2, 1])
+l = np.array([3, 2, 1])
 
+m, L, w, dw, b, db, Z, dZ, A, dA= INN.initial_NeuralNetwork(inputs = x, unitsNum_inLayer = l, labels = y)
+print(w[0].shape)
+'''
+print(dw)
+print(b)
+print(db)
+print(Z)
+print(dZ)
+print(A)
+print(dA)
+'''
+'''
 L = l.shape[0] - 1
 m = x.shape[1]
 
@@ -36,7 +49,7 @@ A = INN.initial_A(unitsNum_inLayer = l, set_size = m, input = x)
 dA = INN.initial_A(unitsNum_inLayer = l, set_size = m, input = x)
 
 #print(Z)
-
+'''
 for i in range(1, L + 1):
     Z[i] = np.dot(w[i], A[i - 1]) + b[i]
     A[i] = NNT.activate_Sigma(Z[i])
@@ -46,10 +59,10 @@ for i in range(1, L + 1):
 #db[L] = np.sum(dZ[L], axis = 1, keepdims = True) / m
 dA[L] = -y / A[L] + (1 - y) / (1 - A[L]) 
 
-for i in range(L, 0):
-    dZ[i] = dA[i]* derivative_Sigma(Z[i])
-    dW[i] = np.dot(dZ[i], A[i - 1].T) / m
+for i in range(L, 0, -1):
+    dZ[i] = dA[i]* NNT.derivative_Sigma(Z[i])
+    dw[i] = np.dot(dZ[i], A[i - 1].T) / m
     db[i] = np.sum(dZ[i], axis = 1, keepdims = True) / m
     dA[i - 1] = np.dot(w[i].T, dZ[i])
     
-print(Z)
+print(dZ)

@@ -92,6 +92,7 @@ def initial_A(unitsNum_inLayer = [], set_size = 1, input = []):
     A = [input]
     for i in range(1, len(unitsNum_inLayer)):
         A.append(np.zeros((unitsNum_inLayer[i], set_size)))
+    #print(A)
     return A
 
 
@@ -106,13 +107,40 @@ input                            The data of input layer
 output: 
 A    The final result parameter
 '''
-def initial_A(unitsNum_inLayer = [], set_size = 1, input = []):
+def initial_NeuralNetwork(inputs = [], unitsNum_inLayer = [], labels = [], w = [], dw = [], b = [], db = [], Z = [], dZ = [], A = [], dA = []):
     # 按照每一层的节点数，创建的零矩阵Z[i] (unitsNum_inLayer[i] × 1)，作为每一层的最终结果
     # 将每一层的最终结果矩阵A[i]加和，得到整个神经网络的矩阵参数A
     # 第0层为输入层，A[0]为输入数据
     assert len(unitsNum_inLayer) > 0, 'unitsNum_inLayer is  less than or equal to 0'
-    assert len(input) > 0, 'input is  NONE'
-    A = [input]
-    for i in range(1, len(unitsNum_inLayer)):
-        A.append(np.zeros((unitsNum_inLayer[i], set_size)))
-    return A
+    assert len(inputs) > 0, 'inputs is  NONE'
+    assert len(labels) > 0, 'labels is  NONE'
+    
+    x = inputs.T
+    x = x.reshape((x.shape[0],x.shape[1]))
+    labels = labels.reshape((labels.shape[0],labels.shape[1]))
+    m = x.shape[1]
+    L = len(unitsNum_inLayer)
+    #print(L)
+    l = np.append(np.array([x.shape[0]]),unitsNum_inLayer)
+    
+    w.clear()
+    w = np.append(w, initial_W(unitsNum_inLayer = l))
+    dw.clear()
+    dw = np.append(dw, initial_W(unitsNum_inLayer = l))
+
+    b.clear()
+    b = np.append(b, initial_b(unitsNum_inLayer = l))
+    db.clear()
+    db = np.append(db, initial_b(unitsNum_inLayer = l))
+
+    Z.clear()
+    Z = np.append(Z, initial_Z(unitsNum_inLayer = l, set_size = m, input = x))
+    dZ.clear()
+    dZ = np.append(dZ, initial_Z(unitsNum_inLayer = l, set_size = m, input = x))
+
+    A.clear()
+    A = np.append(A, initial_A(unitsNum_inLayer = l, set_size = m, input = x))
+    dA.clear()
+    dA = np.append(dA, initial_A(unitsNum_inLayer = l, set_size = m, input = x))
+    
+    return m, L, w, dw, b, db, Z, dZ, A, dA
