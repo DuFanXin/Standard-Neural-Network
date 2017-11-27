@@ -1,9 +1,12 @@
 import numpy as np
 import Initial_NeuralNetwork as INN
-l = np.array([3, 3, 2, 1])
-w = []
-w.clear()
-#w.append(INN.initial_W(unitsNum_inLayer = l))
-#w = INN.initial_W(unitsNum_inLayer = l)
-w = np.append(w, INN.initial_W(unitsNum_inLayer = l))
-print(w[0].shape)
+x = np.array([[1, 2, 3], [2, 3, 4]])
+#x = x.reshape((x.shape[0], x.shape[1]))
+def fun(m = [], out_m = []):
+    m.clear()
+    m.append(i)
+y = np.array([[1], [2]])
+#fun(y)
+x = [[1, 2, 3], [2, 3, 4]]
+print(x.shape)
+print(y.shape)
