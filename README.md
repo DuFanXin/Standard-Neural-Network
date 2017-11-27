@@ -1,2 +1,29 @@
 # Standard-Neural-Network
-It`s a Standard Neural Network
+
+---
+# 项目名称
+-------------
+
+Standard-Neural-Network(标准神经网络)
+
+# 背景:  
+练习编写神经网络，了解一个标准的神经网络的构成，运行过程和各种参数的设置
+
+# 语言
+Python 3.5
+
+
+# 下载安装
+可用Eclipse导入运行
+
+# 使用方法
+包括初始化神经网络的函数
+
+# 注意事项
+由于没有做性能优化，建议运行较小规模的神经网络
+
+# TODO（可选）
+搭建有目的的神经网络，例如：卷积神经网络
+
+# License
+MIT协议
