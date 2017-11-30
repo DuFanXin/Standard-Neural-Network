@@ -1,12 +1,9 @@
 import numpy as np
+import pandas as pd #导入数据分析库Pandas
 import Initial_NeuralNetwork as INN
+
+inputfile = 'C:/Users/yzc/Desktop/1.xlsx' #销量数据路径
+data = pd.read_excel(inputfile)
+
 x = np.array([[1, 2, 3], [2, 3, 4]])
-#x = x.reshape((x.shape[0], x.shape[1]))
-def fun(m = [], out_m = []):
-    m.clear()
-    m.append(i)
-y = np.array([[1], [2]])
-#fun(y)
-x = [[1, 2, 3], [2, 3, 4]]
-print(x.shape)
-print(y.shape)
+print(data)

@@ -10,9 +10,10 @@ import Initial_NeuralNetwork as INN
 import NeuralNetwork_Tools as NNT
 import  numpy as np
 
-x = np.array([[1, 2, 3], [2, 3, 4]])
-y = np.array([[1], [2]]).T
-l = np.array([3, 2, 1])
+x = np.array([[1, 2, 3], [2, 3, 4],[4, 5, 6]])
+y = np.array([[1], [2], [3]]).T
+l = np.array([3 ,3, 2, 1])
+alpha = 0.5
 
 w, dw, b, db, Z, dZ, A, dA = [], [], [], [], [], [], [], []
 m, L = INN.initial_NeuralNetwork(eigenvector = x, unitsNum_inLayer = l, labels = y, output_w = w, output_dw = dw, output_b = b, output_db = db, output_Z = Z, output_dZ = dZ, output_A = A, output_dA = dA)
@@ -42,5 +43,7 @@ for i in range(L, 0, -1):
     dw[i] = np.dot(dZ[i], A[i - 1].T) / m
     db[i] = np.sum(dZ[i], axis = 1, keepdims = True) / m
     dA[i - 1] = np.dot(w[i].T, dZ[i])
+    w[i] = w[i] - alpha * dw[i]
+    b[i] = b[i] - alpha * b[i]
     
-print(dZ)
+print(w)
