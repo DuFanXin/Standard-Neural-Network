@@ -142,3 +142,36 @@ def derivative_leakyRelu(x = []):
     dleakyRelu[dleakyRelu < 0] = 0.01
     dleakyRelu[dleakyRelu == 0] = 0.01
     return dleakyRelu
+
+'''
+function:
+calculate the loss(difference) of predict value and real value
+
+input:
+a    The predict value
+y    The real value
+
+output:
+loss    loss(difference) of predict value and real value
+'''
+def Loss(a = 0 , y = 0):
+    loss = -(y * math.log(a) + (1 - y) * math.log(1 - a))
+    return loss
+
+'''
+function:
+calculate the loss(difference) of predict value and real value
+
+input:
+a    The predict value
+y    The real value
+
+output:
+loss    loss(difference) of predict value and real value
+'''
+def Cost(A = [] , Y = []):
+    assert len(A) > 0, '预测值A 的输入为空'
+    assert len(Y) > 0, '实际值Y 的输入为空'
+    cost = -(Y * np.log10(A) + (1 - Y) * np.log10(1 - A))
+    cost = np.sum(cost) / cost.shape[1]
+    return cost

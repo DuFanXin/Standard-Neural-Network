@@ -27,7 +27,7 @@ def initial_W(unitsNum_inLayer = [], output_w = []):
     output_w.append(np.identity(unitsNum_inLayer[0]))
     #output_w = [np.identity(unitsNum_inLayer[0])]
     for i in range(1, len(unitsNum_inLayer)):
-        output_w.append(np.random.randn(unitsNum_inLayer[i], unitsNum_inLayer[i - 1]))
+        output_w.append(np.random.randn(unitsNum_inLayer[i], unitsNum_inLayer[i - 1])*np.sqrt(unitsNum_inLayer[i - 1]))
     #return output_w
 
 

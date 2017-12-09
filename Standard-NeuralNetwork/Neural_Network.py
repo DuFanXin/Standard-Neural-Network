@@ -10,6 +10,10 @@ import Initial_NeuralNetwork as INN
 import NeuralNetwork_Tools as NNT
 import  numpy as np
 
+
+class NeuralNetwork:
+    def __init__(self, x, y, l):
+        d
 x = np.array([[1, 2, 3], [2, 3, 4],[4, 5, 6]])
 y = np.array([[1], [2], [3]]).T
 l = np.array([3 ,3, 2, 1])
@@ -27,23 +31,27 @@ print(dZ)
 print(A)
 print(dA)
 '''
-for i in range(1, L + 1):
+for i in range(1, L):
     Z[i] = np.dot(w[i], A[i - 1]) + b[i]
-    A[i] = NNT.activate_Sigma(Z[i])
+    A[i] = NNT.activate_Relu(Z[i])
     
 #dZ[L] = A[L] - y
 #dw[L] = dZ[L] / m * A[L - 1].T
 #db[L] = np.sum(dZ[L], axis = 1, keepdims = True) / m
 
-dA[L] = -y / A[L] + (1 - y) / (1 - A[L]) 
-
+Z[L] = np.dot(w[L], A[L - 1]) + b[L]
+A[L] = NNT.activate_Sigma(Z[L])
+NNT.Cost(A, y)
+dA[L] = -y / A[L] + (1 - y) / (1 - A[L])
+dZ[L] = dA[L]* NNT.derivative_Sigma(Z[L])
 
 for i in range(L, 0, -1):
-    dZ[i] = dA[i]* NNT.derivative_Sigma(Z[i])
+    if(i < L):
+        dZ[i] = dA[i]* NNT.derivative_Relu(Z[i])
     dw[i] = np.dot(dZ[i], A[i - 1].T) / m
     db[i] = np.sum(dZ[i], axis = 1, keepdims = True) / m
     dA[i - 1] = np.dot(w[i].T, dZ[i])
     w[i] = w[i] - alpha * dw[i]
     b[i] = b[i] - alpha * b[i]
     
-print(w)
+print(A)
