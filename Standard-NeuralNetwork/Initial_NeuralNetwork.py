@@ -23,9 +23,9 @@ def initial_W(unitsNum_inLayer = [], output_w = []):
     # 将每一层的矩阵参数W[i]加和，得到整个神经网络的矩阵参数W
     # output_w = np.random.randn(raw, column)
     assert len(unitsNum_inLayer) > 0, 'unitsNum_inLayer is  less than or equal to 0'
+    
     output_w.clear()
     output_w.append(np.identity(unitsNum_inLayer[0]))
-    #output_w = [np.identity(unitsNum_inLayer[0])]
     for i in range(1, len(unitsNum_inLayer)):
         output_w.append(np.random.randn(unitsNum_inLayer[i], unitsNum_inLayer[i - 1])*np.sqrt(unitsNum_inLayer[i - 1]))
     #return output_w
@@ -45,6 +45,7 @@ def initial_b(unitsNum_inLayer = [], output_b = []):
     # 按照每一层的节点数，创建的零矩阵b[i] (unitsNum_inLayer[i] × 1)，作为每一层的参数
     # 将每一层的矩阵参数b[i]加和，得到整个神经网络的矩阵参数b
     assert len(unitsNum_inLayer) > 0, 'unitsNum_inLayer is  less than or equal to 0'
+    
     output_b.clear()
     for i in range(0, len(unitsNum_inLayer)):
         output_b.append(np.zeros((unitsNum_inLayer[i], 1)))
@@ -69,6 +70,7 @@ def initial_Z(unitsNum_inLayer = [], set_size = 1, eigenvector = [], output_Z = 
     # 第0层为输入层，Z[0]为输入数据
     assert len(unitsNum_inLayer) > 0, 'unitsNum_inLayer is  less than or equal to 0'
     assert len(eigenvector) > 0, 'eigenvector is  NONE'
+    
     output_Z.clear()
     output_Z.append(eigenvector)
     for i in range(1, len(unitsNum_inLayer)):
@@ -94,6 +96,7 @@ def initial_A(unitsNum_inLayer = [], set_size = 1, eigenvector = [], output_A = 
     # 第0层为输入层，A[0]为输入数据
     assert len(unitsNum_inLayer) > 0, 'unitsNum_inLayer is  less than or equal to 0'
     assert len(eigenvector) > 0, 'eigenvector is  NONE'
+    
     output_A.clear()
     output_A.append(eigenvector)
     for i in range(1, len(unitsNum_inLayer)):
@@ -132,11 +135,11 @@ def initial_NeuralNetwork(eigenvector = [], unitsNum_inLayer = [], labels = [], 
     assert len(labels) > 0, 'labels is  NONE'
     
 	#将特征向量转置，使x得每一列为一组特征向量
-    x = eigenvector.T
-    x = x.reshape((x.shape[0],x.shape[1]))
+    x = eigenvector
+    #x = x.reshape((x.shape[0],x.shape[1]))
     
 	#确定标签矩阵行数和列数
-    labels = labels.reshape((labels.shape[0],labels.shape[1]))
+    #labels = labels.reshape((labels.shape[0],labels.shape[1]))
 	
 	#m为训练集的大小，L为神经网络的层数
     m = x.shape[1]
