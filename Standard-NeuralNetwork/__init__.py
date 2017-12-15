@@ -3,7 +3,7 @@ import pandas as pd #导入数据分析库Pandas
 import Initial_NeuralNetwork as INN
 import NeuralNetwork_Tools as NNT
 import Neural_Network as NN
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt #画图
 
 inputfile = 'C:/Users/yzc/Desktop/1.xlsx' #销量数据路径
 x = np.array([[1, 2, 3], [2, 3, 4],[4, 5, 6]])
